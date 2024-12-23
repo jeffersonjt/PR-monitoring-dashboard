@@ -187,11 +187,22 @@ elif time_range == "Custom":
 
 # Filter data based on selected date range
 filtered_data = traffic_df[(traffic_df['date'] >= start_date) & (traffic_df['date'] <= end_date)]
+news_df['Date'] = pd.to_datetime(news_df['Date'])
 news_df = news_df[(news_df['Date'] >= start_date) & (news_df['Date'] <= end_date)]
+
+web_df['Date'] = pd.to_datetime(web_df['Date'])
 web_df = web_df[(web_df['Date'] >= start_date) & (web_df['Date'] <= end_date)]
+
+twt_df['created_at'] = pd.to_datetime(twt_df['created_at'])
 twt_df = twt_df[(twt_df['created_at'] >= start_date) & (twt_df['created_at'] <= end_date)]
+
+fb_df['Date'] = pd.to_datetime(fb_df['Date'])
 fb_df = fb_df[(fb_df['Date'] >= start_date) & (fb_df['Date'] <= end_date)]
+
+ig_df['Date'] = pd.to_datetime(ig_df['Date'])
 ig_df = ig_df[(ig_df['Date'] >= start_date) & (ig_df['Date'] <= end_date)]
+
+yt_df['Date'] = pd.to_datetime(yt_df['Date'])
 yt_df = yt_df[(yt_df['Date'] >= start_date) & (yt_df['Date'] <= end_date)]
 
 total_mentions = {
