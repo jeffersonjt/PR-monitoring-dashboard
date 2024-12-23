@@ -97,6 +97,12 @@ yt_df = fetch_youtube_data()
 twt_df['total_engagements'] = twt_df['retweets'] + twt_df['likes'] + twt_df['views'] + twt_df['reply_count']
 twt_df['AVE'] = twt_df['total_engagements']*0.15
 
+fb_df['Reach'] = fb_df[['Likes', 'Comments', 'Shares']].max(axis=1)
+fb_df['AVE'] = (fb_df['Likes'] *  0.05 ) + (fb_df['Comments'] * 0.10) + (fb_df['Shares'] * 0.10)
+
+ig_df['Reach'] = ig_df[['Likes', 'Comments']].max(axis=1)
+ig_df['AVE'] = (ig_df['Likes'] * 0.1) + (ig_df['Comments'] * 0.2)
+
 def count_mentions(df, start_date, end_date, date_col):
     filtered_df = df[(df[date_col] >= start_date) & (df[date_col] <= end_date)]
     return len(filtered_df)
@@ -218,6 +224,8 @@ total_reach = {
     "News" : count_reach(news_df, start_date, end_date, 'Date', 'Estimated Reach'),
     "Web & Blogs" : count_reach(web_df, start_date, end_date, 'Date', 'Estimated Reach'),
     "Twitter" : count_reach(twt_df, start_date, end_date, 'created_at','views'),
+    "Facebook": count_reach(fb_df, start_date, end_date, 'Date', 'Reach'),
+    'Instagram': count_reach(ig_df, start_date, end_date, 'Date', 'Reach'),
     "YouTube" : count_reach(yt_df, start_date, end_date, 'Date','Views')
     }
 
@@ -225,6 +233,8 @@ total_ave = {
     "News" : count_ave(news_df, start_date, end_date, 'Date'),
     "Web & Blogs" : count_ave(web_df, start_date, end_date, 'Date'),
     "Twitter" : count_ave(twt_df, start_date, end_date, 'created_at'),
+    "Facebook" : count_ave(fb_df, start_date, end_date, 'Date'),
+    "Instagram" : count_ave(ig_df, start_date, end_date, 'Date'),
     "YouTube" : count_ave(yt_df, start_date, end_date, 'Date')
     }
 
@@ -980,7 +990,6 @@ if selected_options[5]:
 
 fig.update_layout(hoverdistance=hoverdistance)
 graph_placeholder.plotly_chart(fig, use_container_width=True)
-
 
 
 
