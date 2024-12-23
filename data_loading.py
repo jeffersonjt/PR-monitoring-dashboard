@@ -46,12 +46,10 @@ def fetch_bigquery_table(table_id):
     Returns:
     - pandas.DataFrame: The table contents as a DataFrame.
     """
-    # Create a BigQuery client
-    client = bigquery.Client()
 
     # Query to select all data from the table
     query = f'''SELECT * FROM `{table_id}`'''
 
     # Run the query and return the results as a DataFrame
-    dataframe = client.query(query).result().to_dataframe()
+    dataframe = client_bq.query(query).result().to_dataframe()
     return dataframe
