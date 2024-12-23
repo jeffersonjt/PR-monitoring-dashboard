@@ -55,6 +55,3 @@ def fetch_bigquery_table(table_id):
     # Run the query and return the results as a DataFrame
     dataframe = client.query(query).result().to_dataframe()
     return dataframe
-
-monthly_traffic_data = get_monthly_traffic()
-st.write(monthly_traffic_data)
