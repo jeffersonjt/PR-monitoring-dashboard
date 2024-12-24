@@ -109,10 +109,12 @@ def count_mentions(df, start_date, end_date, date_col):
 
 def count_reach(df, start_date, end_date, date_col, reach_col):
     filtered_df = df[(df[date_col] >= start_date) & (df[date_col] <= end_date)]
+    filtered_df[reach_col] = filtered_df[reach_col].fillna(0)
     return int(sum(filtered_df[reach_col].values))
 
 def count_ave(df, start_date, end_date, date_col):
     filtered_df = df[(df[date_col] >= start_date) & (df[date_col] <= end_date)]
+    filtered_df['AVE'] = filtered_df['AVE'].fillna(0)
     return int(sum(filtered_df['AVE'].values))
 
 st.markdown("""
