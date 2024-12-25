@@ -8,20 +8,20 @@ import plotly.express as px
 import plotly.graph_objects as go
 from urllib.parse import urlparse
 
-@st.cache_data
+@st.cache_data(ttl=86400)
 def load_data():
     df = get_monthly_traffic()
     df['date'] = pd.to_datetime(df['date'])
     return df.sort_values(by='date', ascending=True)
 
-@st.cache_data
+@st.cache_data(ttl=86400)
 def fetch_news_data():
     df = fetch_bigquery_table("pr-project-444202.pr_project_scraped_data.news_data")
     df['Date'] = pd.to_datetime(df['Date'])
     df['Date'] = df['Date'].dt.date
     return df.sort_values(by='Date', ascending=True)
 
-@st.cache_data
+@st.cache_data(ttl=86400)
 def fetch_web_data():
     df= fetch_bigquery_table("pr-project-444202.pr_project_scraped_data.web_data")
     df['Date'] = pd.to_datetime(df['Date'])
@@ -29,7 +29,7 @@ def fetch_web_data():
     df = df.dropna(subset=['Date'])
     return df.sort_values(by='Date', ascending=True)
 
-@st.cache_data
+@st.cache_data(ttl=86400)
 def fetch_twitter_data():
     df = fetch_bigquery_table("pr-project-444202.pr_project_scraped_data.twitter_data")
     df['created_at'] = pd.to_datetime(df['created_at'])
@@ -37,7 +37,7 @@ def fetch_twitter_data():
     df = df.dropna(subset=['created_at'])
     return df.sort_values(by='created_at', ascending=True)
 
-@st.cache_data
+@st.cache_data(ttl=86400)
 def fetch_facebook_data():
     df = fetch_bigquery_table("pr-project-444202.pr_project_scraped_data.facebook_data")
     df['Date'] = pd.to_datetime(df['Date'])
@@ -45,7 +45,7 @@ def fetch_facebook_data():
     df = df.dropna(subset=['Date'])
     return df.sort_values(by='Date', ascending=True)
 
-@st.cache_data
+@st.cache_data(ttl=86400)
 def fetch_instagram_data():
     df = fetch_bigquery_table("pr-project-444202.pr_project_scraped_data.instagram_data")
     df['Date'] = pd.to_datetime(df['Date'])
@@ -53,7 +53,7 @@ def fetch_instagram_data():
     df = df.dropna(subset=['Date'])
     return df.sort_values(by='Date', ascending=True)
     
-@st.cache_data
+@st.cache_data(ttl=86400)
 def fetch_youtube_data():
     df = fetch_bigquery_table("pr-project-444202.pr_project_scraped_data.youtube_data")
     df['Date'] = pd.to_datetime(df['Date'])
